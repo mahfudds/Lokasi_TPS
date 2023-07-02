@@ -40,7 +40,9 @@ class OutletMapController extends Controller
     ->get()
     ->toArray();
     }
-    return $dataTable->render('outlets.map', compact('locations', 'rekap', 'Kecamatan', 'Kelurahan'));
+
+    $distinctKecamatan = Dpt::distinct()->orderBy('Kecamatan')->pluck('Kecamatan');
+    return $dataTable->render('outlets.map', compact('locations', 'rekap', 'Kecamatan', 'Kelurahan','distinctKecamatan'));
 }
 
 }

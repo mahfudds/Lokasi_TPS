@@ -7,10 +7,22 @@
 @section('content')
 <div class="card">
     <div class="card-header d-flex justify-content-between">
+
+        <div class="dropdown">
+            <button class="btn btn-success dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                Pilih Kecamatan
+            </button>
+            <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                @foreach ($distinctKecamatan as $item)
+                <a class="dropdown-item" href="{{ url('dpt/' . $item) }}"> {{ $item }} </a>
+            @endforeach
+            </div>
+        </div>
         <div class="header-title"> TPS - {{ isset($Kecamatan) ? $Kecamatan : ''}} - {{ isset($Kelurahan) ? $Kelurahan : ''}}</div>
     </div>
     <div class="card-body" id="mapid"></div>
 </div>
+
 <div class="mt-3"></div>
     <div class="card">
         <div class="card-header d-flex justify-content-between">
