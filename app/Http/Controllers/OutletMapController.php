@@ -5,7 +5,9 @@ use App\dpt;
 use Yajra\DataTables\DataTables;
 use App\DataTables\dptDataTable;
 use Illuminate\Http\Request;
-
+use Illuminate\Support\Facades\DB;
+use ConsoleTVs\Charts\Classes\Chartjs\Chart;
+use ConsoleTVs\Charts\Classes\Chartjs\Plugins;
 class OutletMapController extends Controller
 {
     /**
@@ -42,7 +44,23 @@ class OutletMapController extends Controller
     }
 
     $distinctKecamatan = Dpt::distinct()->orderBy('Kecamatan')->pluck('Kecamatan');
-    return $dataTable->render('outlets.map', compact('locations', 'rekap', 'Kecamatan', 'Kelurahan','distinctKecamatan'));
+    $rekapkab = DB::table('dpt')
+    ->select('Kecamatan', DB::raw('SUM(Jumlah_Pemilih) AS DPT'))
+    ->groupBy('Kecamatan')
+    ->get();
+
+    $color = '#00235B'; // Specify the desired color
+
+    $chartrekap = new Chart;
+    $chartrekap->labels($rekapkab->pluck('Kecamatan'));
+
+    $dataset = $chartrekap->dataset('DPT', 'bar', $rekapkab->pluck('DPT')->toArray());
+    $dataset->backgroundColor($color)->color($color);
+    $dataset->fill(true); // Enable filling
+
+
+
+    return $dataTable->render('outlets.map', compact('locations', 'rekap', 'Kecamatan', 'Kelurahan','distinctKecamatan','chartrekap'));
 }
 
 }

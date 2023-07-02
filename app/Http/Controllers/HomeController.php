@@ -8,6 +8,9 @@ use Illuminate\Http\Request;
 use App\Exports\DptExport;
 use Maatwebsite\Excel\Facades\Excel;
 use Symfony\Component\Process\Process;
+use Illuminate\Support\Facades\DB;
+use ConsoleTVs\Charts\Classes\Chartjs\Chart;
+use ConsoleTVs\Charts\Classes\Chartjs\Plugins;
 class HomeController extends Controller
 {
     /**

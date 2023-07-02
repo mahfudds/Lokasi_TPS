@@ -35,6 +35,18 @@
         </div>
     </div>
 
+    <div class="mt-3"></div>
+    <div class="card">
+        <div class="card-header d-flex justify-content-between">
+            <div class="header-title"> </div>
+        </div>
+        <div class="card-body px-2">
+            <div class="table-responsive">
+                {!! $chartrekap->container() !!}
+
+            </div>
+        </div>
+    </div>
 @endsection
 
 @section('styles')
@@ -82,6 +94,9 @@
     integrity="sha512-/Nsx9X4HebavoBvEBuyp3I7od5tA0UzAxs+j83KgC8PU0kgB4XiK4Lfe4y4cgBtaRJQEIFCW+oC506aPT2L1zw=="
     crossorigin=""></script>
 <script src="https://unpkg.com/leaflet.markercluster@1.4.1/dist/leaflet.markercluster.js"></script>
+<script src=https://cdnjs.cloudflare.com/ajax/libs/echarts/4.0.2/echarts-en.min.js charset=utf-8></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.1/Chart.min.js" charset="utf-8"></script>
+{!! $chartrekap->script() !!}
 <script>
     var map = L.map('mapid');
 
@@ -129,5 +144,7 @@
         attribution: 'Map data &copy; <a href="https://www.openstreetmap.org/">OpenStreetMap</a> contributors',
         maxZoom: 18
     }).addTo(map);
+
+
 </script>
 @endpush
