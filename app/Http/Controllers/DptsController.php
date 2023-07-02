@@ -47,6 +47,8 @@ class DptsController extends Controller
 		$dpt->No_TPS = $request->input('No_TPS');
 		$dpt->Latitude = $request->input('Latitude');
 		$dpt->Longitude = $request->input('Longitude');
+        $dpt->l = $request->input('l');
+        $dpt->p = $request->input('p');
 		$dpt->Jumlah_pemilih = $request->input('Jumlah_pemilih');
 		$dpt->validasi = $request->input('validasi');
         $dpt->save();
@@ -95,7 +97,9 @@ class DptsController extends Controller
 		$dpt->No_TPS = $request->input('No_TPS');
 		$dpt->Latitude = $request->input('Latitude');
 		$dpt->Longitude = $request->input('Longitude');
-		$dpt->Jumlah_Pemilih = $request->input('Jumlah_Pemilih');
+        $dpt->l = $request->input('l');
+        $dpt->p = $request->input('p');
+		$dpt->Jumlah_Pemilih = $dpt->l + $dpt->p ;
 		$dpt->validasi = $request->input('validasi');
         $dpt->save();
 

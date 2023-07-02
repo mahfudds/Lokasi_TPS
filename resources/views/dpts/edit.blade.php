@@ -43,8 +43,16 @@
             {{ Form::text('Longitude', null, array('class' => 'form-control','id'=>'Longitude','onchange'=>'handleInputValueChange()')) }}
         </div>
         <div class="mb-3">
+            {{ Form::label('Laki-laki', 'Jumlah_pemilih', ['class'=>'form-label']) }}
+            {{ Form::text('l', null, array('class' => 'form-control')) }}
+        </div>
+        <div class="mb-3">
+            {{ Form::label('Perempuan', 'Jumlah_pemilih', ['class'=>'form-label']) }}
+            {{ Form::text('p', null, array('class' => 'form-control')) }}
+        </div>
+        <div class="mb-3">
             {{ Form::label('Jumlah_Pemilih', 'Jumlah_pemilih', ['class'=>'form-label']) }}
-            {{ Form::text('Jumlah_Pemilih', null, array('class' => 'form-control')) }}
+            {{ Form::text('Jumlah_Pemilih', null, array('class' => 'form-control', 'readonly')) }}
         </div>
         <div class="mb-3">
             {{ Form::label('validasi', 'Validasi', ['class'=>'form-label']) }}

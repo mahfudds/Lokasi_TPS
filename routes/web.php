@@ -21,6 +21,7 @@ Route::group(['middleware' => 'auth'], function () {
     Route::get('/home', 'HomeController@index')->name('home');
     Route::get('/buatuser', 'HomeController@buatuser')->name('buatuser');
     Route::get('/download', 'HomeController@export')->name('download');
+    Route::get('/update', 'HomeController@update')->name('update');
 });
 /*
  * Outlets Routes

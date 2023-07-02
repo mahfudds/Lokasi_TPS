@@ -48,7 +48,7 @@
 <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
 
 <style>
-    #mapid { min-height: 80vh; }
+    #mapid { min-height: 70vh; }
     .custom-marker0 {
         background-color: rgb(100, 99, 99);
         border-radius: 50%;
