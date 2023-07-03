@@ -47,6 +47,23 @@
             </div>
         </div>
     </div>
+    @if ($chartkecamatan)
+
+    <div class="mt-3"></div>
+    <div class="card">
+        <div class="card-header d-flex justify-content-between">
+            <div class="header-title"> </div>
+        </div>
+        <div class="card-body px-2">
+            <div class="table-responsive">
+                {!! $chartkecamatan->container() !!}
+
+            </div>
+        </div>
+    </div>
+
+    @endif
+
 @endsection
 
 @section('styles')
@@ -62,14 +79,14 @@
 <style>
     #mapid { min-height: 70vh; }
     .custom-marker0 {
-        background-color: rgb(100, 99, 99);
+        background-color:#00235B;
         border-radius: 50%;
         color: rgb(255, 255, 255);
         font-size: 7pt;
         text-align: center;
         font-weight: bold;
         line-height: 24px;
-        border: 2px solid black;
+        border: 1px solid #FFDD83;
     }
     .custom-marker1 {
         background-color: rgb(247, 7, 7);
@@ -79,7 +96,7 @@
         text-align: center;
         font-weight: bold;
         line-height: 24px;
-        border: 1px solid black;
+        border: 1px solid #00235B;
     }
     .card-header{
         background-color: rgb(245, 1, 13);
@@ -96,6 +113,9 @@
 <script src="https://unpkg.com/leaflet.markercluster@1.4.1/dist/leaflet.markercluster.js"></script>
 <script src=https://cdnjs.cloudflare.com/ajax/libs/echarts/4.0.2/echarts-en.min.js charset=utf-8></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.1/Chart.min.js" charset="utf-8"></script>
+@if ($chartkecamatan)
+{!! $chartkecamatan->script() !!}
+@endif
 {!! $chartrekap->script() !!}
 <script>
     var map = L.map('mapid');

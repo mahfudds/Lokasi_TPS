@@ -37,6 +37,37 @@ class OutletMapController extends Controller
         $locations = Dpt::where('Kecamatan', $Kecamatan)
             ->get()
             ->toArray();
+
+            $rekapkec = DB::table('dpt')
+            ->select('Kelurahan', DB::raw('SUM(Jumlah_Pemilih) AS DPT'))
+            ->where('Kecamatan', $Kecamatan) // Add the WHERE clause
+            ->groupBy('Kelurahan')
+            ->get();
+
+            $color = '#E21818'; // Specify the desired color
+
+            $chartkecamatan = new Chart;
+            $chartkecamatan->labels($rekapkec->pluck('Kelurahan'));
+
+            $dataset = $chartkecamatan->dataset('DPT', 'bar', $rekapkec->pluck('DPT')->toArray());
+            $dataset->backgroundColor($color)->color($color);
+            $dataset->fill(true); // Enable filling
+            $chartkecamatan->options([
+                'scales' => [
+                    'xAxes' => [[
+                        'ticks' => [
+                            'maxRotation' => 90,
+                            'minRotation' => 45,
+                            'autoSkip' => false,
+                        ],
+                    ]],
+                ],
+            ]);
+
+
+
+
+
     } elseif (is_null($Kecamatan) && is_null($Kelurahan)) {
         $locations = Dpt::where('Kode_Kelurahan', 'LIKE', '352113%')
     ->get()
@@ -57,10 +88,25 @@ class OutletMapController extends Controller
     $dataset = $chartrekap->dataset('DPT', 'bar', $rekapkab->pluck('DPT')->toArray());
     $dataset->backgroundColor($color)->color($color);
     $dataset->fill(true); // Enable filling
+    $chartrekap->options([
+        'scales' => [
+            'xAxes' => [[
+                'ticks' => [
+                    'maxRotation' => 90,
+                    'minRotation' => 45,
+                    'autoSkip' => false,
+                ],
+            ]],
+        ],
+    ]);
 
+    $compactData = ['locations', 'rekap', 'Kecamatan', 'Kelurahan', 'distinctKecamatan','chartrekap'];
 
+if (isset($chartkecamatan)) {
+    $compactData[] = 'chartkecamatan';
+}
 
-    return $dataTable->render('outlets.map', compact('locations', 'rekap', 'Kecamatan', 'Kelurahan','distinctKecamatan','chartrekap'));
+return $dataTable->render('outlets.map', compact($compactData));
 }
 
 }

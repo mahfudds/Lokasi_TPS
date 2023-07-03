@@ -28,7 +28,7 @@
 
     <style>
         .navbar-laravel {
-            background-color: #e63946; /* Change the background color to your preferred color */
+            background-color: #00235B; /* Change the background color to your preferred color */
             color: #fff; /* Change the font color to white */
             position: fixed;
             top: 0;
@@ -50,7 +50,7 @@
         .navbar-laravel .navbar-nav .nav-link:hover,
         .navbar-laravel .navbar-nav .nav-link:focus {
             color: #fff;
-            background-color: #e63946; /* Change the background color on hover/focus */
+            background-color: #00235B; /* Change the background color on hover/focus */
         }
 
         .logo-img {
