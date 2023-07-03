@@ -47,7 +47,7 @@
             </div>
         </div>
     </div>
-    @if ($chartkecamatan)
+    @if (isset($chartkecamatan))
 
     <div class="mt-3"></div>
     <div class="card">
@@ -113,7 +113,7 @@
 <script src="https://unpkg.com/leaflet.markercluster@1.4.1/dist/leaflet.markercluster.js"></script>
 <script src=https://cdnjs.cloudflare.com/ajax/libs/echarts/4.0.2/echarts-en.min.js charset=utf-8></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.1/Chart.min.js" charset="utf-8"></script>
-@if ($chartkecamatan)
+@if (isset($chartkecamatan))
 {!! $chartkecamatan->script() !!}
 @endif
 {!! $chartrekap->script() !!}
