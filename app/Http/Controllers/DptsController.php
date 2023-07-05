@@ -16,9 +16,9 @@ class DptsController extends Controller
      */
     public function index( dptsDataTable $dataTable)
     {
-
+        $queries=[];
         $dpts= Dpt::all();
-        return $dataTable->render('dpts.index');
+        return $dataTable->render('dpts.index', compact('queries'));
     }
 
     /**
@@ -97,6 +97,7 @@ class DptsController extends Controller
 		$dpt->No_TPS = $request->input('No_TPS');
 		$dpt->Latitude = $request->input('Latitude');
 		$dpt->Longitude = $request->input('Longitude');
+		$dpt->alamat = $request->input('alamat');
         $dpt->l = $request->input('l');
         $dpt->p = $request->input('p');
 		$dpt->Jumlah_Pemilih = $dpt->l + $dpt->p ;

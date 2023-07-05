@@ -35,6 +35,10 @@
             {{ Form::text('No_TPS', null, ['class' => 'form-control', 'readonly']) }}
         </div>
         <div class="mb-3">
+            {{ Form::label('alamat', 'alamat', ['class' => 'form-label']) }}
+            {{ Form::text('alamat', null, ['class' => 'form-control', 'placeholder' => 'Contoh : Rumah Bapak Fulan, Dusun 001/001 Desa']) }}
+        </div>
+        <div class="mb-3">
             {{ Form::label('Latitude', 'Latitude', ['class'=>'form-label']) }}
             {{ Form::text('Latitude', null, array('class' => 'form-control','id'=>'Latitude','onchange'=>'handleInputValueChange()')) }}
         </div>

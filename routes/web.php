@@ -20,8 +20,10 @@ Route::group(['middleware' => 'auth'], function () {
     Route::resource('dpts', 'DptsController');
     Route::get('/home', 'HomeController@index')->name('home');
     Route::get('/buatuser', 'HomeController@buatuser')->name('buatuser');
+    Route::get('/buatuserppk', 'HomeController@buatuserppk')->name('buatuserppk');
     Route::get('/download', 'HomeController@export')->name('download');
     Route::get('/update', 'HomeController@update')->name('update');
+    Route::post('/import','HomeController@import')->name('import');
 });
 /*
  * Outlets Routes

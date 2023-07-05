@@ -7,7 +7,7 @@
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
-    <title>{{ config('app.name', 'Laravel') }}</title>
+    <title>KPU KAB NGAWI</title>
 
     <!-- Fonts -->
     <link rel="dns-prefetch" href="//fonts.gstatic.com">
@@ -33,7 +33,7 @@
             position: fixed;
             top: 0;
             width: 100%;
-            z-index: 9999;
+            z-index: 999;
         }
 
         .navbar-laravel .navbar-brand {
@@ -78,8 +78,8 @@
         <nav class="navbar navbar-expand-md navbar-light navbar-laravel">
             <div class="container">
                 <a class="navbar-brand" href="{{ url('/') }}">
-                    <img src="{{ asset('logo.png') }}" alt="Logo" style="height: 40px">
-                     PPK MANTINGAN
+                    <img src="{{ asset('KPU_Logo.svg') }}" alt="Logo" style="height: 40px">
+                     KPU KAB. NGAWI
                 </a>
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">
                     <span class="navbar-toggler-icon"></span>

@@ -50,10 +50,13 @@ class dptsDataTable extends DataTable
     {
         $user = Auth::user();
         $Kode_Kelurahan = $user->Kode_Kelurahan;
+        $Kecamatan = $user->Kecamatan;
         $query = $model->newQuery();
 
-        if ($Kode_Kelurahan!=='') {
+        if ($Kode_Kelurahan !== '' && $Kecamatan=='') {
             $query->where('Kode_Kelurahan', $Kode_Kelurahan);
+        } elseif ($Kecamatan!=='') {
+            $query->where('Kecamatan', $Kecamatan);
         }
 
         return $query;
@@ -105,6 +108,7 @@ class dptsDataTable extends DataTable
             Column::make('Kecamatan'),
             Column::make('Kelurahan'),
             Column::make('No_TPS'),
+            Column::make('alamat'),
             Column::make('Latitude'),
             Column::make('Longitude'),
             Column::make('Jumlah_Pemilih'),

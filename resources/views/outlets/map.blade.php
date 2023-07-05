@@ -9,7 +9,7 @@
     <div class="card-header d-flex justify-content-between">
 
         <div class="dropdown">
-            <button class="btn btn-success dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            <button style="background-color:#00235B; color:#fff" class="btn btn-info dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                 Pilih Kecamatan
             </button>
             <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
@@ -113,6 +113,7 @@
 <script src="https://unpkg.com/leaflet.markercluster@1.4.1/dist/leaflet.markercluster.js"></script>
 <script src=https://cdnjs.cloudflare.com/ajax/libs/echarts/4.0.2/echarts-en.min.js charset=utf-8></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.1/Chart.min.js" charset="utf-8"></script>
+<script src="https://cdn.jsdelivr.net/npm/leaflet.gridlayer.googlemutant@1.1.0/dist/Leaflet.GoogleMutant.js"></script>
 @if (isset($chartkecamatan))
 {!! $chartkecamatan->script() !!}
 @endif
@@ -121,7 +122,15 @@
     var map = L.map('mapid');
 
     var locations = {!! json_encode($locations) !!};
-
+    
+    
+    function getDirections(latitude, longitude) {
+        // Construct the URL for retrieving directions based on the latitude and longitude
+        var directionsURL = 'https://maps.google.com/maps?q=' + latitude + ',' + longitude;
+    
+        // Open the directions URL in a new tab or window
+        window.open(directionsURL, '_blank');
+    }
     locations.forEach(function(location) {
         var latitude = parseFloat(location['Latitude']);
         var longitude = parseFloat(location['Longitude']);
@@ -141,14 +150,15 @@
         var marker = L.marker([latitude, longitude], {
             icon: markerIcon
         }).addTo(map)
-        .bindPopup(`
-            <b>${location['Kelurahan']}</b><br>
+       .bindPopup(`
+            <h5 style='color: red'>${location['Kelurahan']} -  ${location['No_TPS']}</h5>
             Kecamatan: ${location['Kecamatan']}<br>
-            Kode Kelurahan: ${location['Kode_Kelurahan']}<br>
-            No. TPS: ${location['No_TPS']}<br>
-            Jumlah Pemilih: ${location['Jumlah_Pemilih']}
-        `);
-    });
+            Alamat : ${location['alamat']}<br>
+            Jumlah Pemilih: ${location['Jumlah_Pemilih']}<br>
+            <button class='btn btn-sm btn-danger' onclick="getDirections(${location['Latitude']}, ${location['Longitude']})">Menuju TPS</button>
+            `);
+        
+        });
 
     var markerLatLngs = locations.map(function(location) {
         var latitude = parseFloat(location['Latitude']);
@@ -162,9 +172,39 @@
 
     L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
         attribution: 'Map data &copy; <a href="https://www.openstreetmap.org/">OpenStreetMap</a> contributors',
-        maxZoom: 18
+        maxZoom: 22
     }).addTo(map);
-
+    
+    var defaultTileLayer = L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+    attribution: 'Map data © OpenStreetMap contributors'
+    }).addTo(map);
+    
+    // Add the satellite tile layer
+    var satelliteTileLayer = L.tileLayer('http://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}', {
+    attribution: 'Imagery © Esri',
+    maxZoom: 22
+    });
+    
+    
+    
+    var baseLayers = {
+    'Map View': defaultTileLayer,
+    'Satellite View': satelliteTileLayer
+    };
+    L.control.layers(baseLayers).addTo(map);
+    
+    // Event handler for toggle button click
+    document.getElementById('toggleView').addEventListener('click', function() {
+        // Check the current map view
+        var currentTileLayer = map.hasLayer(defaultTileLayer) ? defaultTileLayer : satelliteTileLayer;
+        
+        // Remove the current tile layer from the map
+        map.removeLayer(currentTileLayer);
+        
+        // Add the other tile layer to the map
+        var newTileLayer = currentTileLayer === defaultTileLayer ? satelliteTileLayer : defaultTileLayer;
+        newTileLayer.addTo(map);
+    });
 
 </script>
 @endpush
